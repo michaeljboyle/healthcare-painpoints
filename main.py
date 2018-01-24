@@ -41,7 +41,10 @@ class KeyHandler(RestHandler):
   # Only modifies votes
   def put(self):
     str_key = get_path_id(self.request.path)
-    p = Post.upvote(str_key)
+    r = json.loads(self.request.body)
+    logging.info(r)
+    votes = r['votes']
+    p = Post.vote(str_key, votes)
     self.SendJson(p.json())
 
   def delete(self):

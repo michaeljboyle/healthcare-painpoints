@@ -10,6 +10,10 @@ class Post(ndb.Model):
     self.votes += 1
     self.put()
 
+  def downvote(self):
+    self.votes -= 1
+    self.put()
+
   def json(self):
     j = {
       'key': self.key.urlsafe(),
@@ -33,9 +37,12 @@ def new(title, description):
   post.put()
   return post
 
-def upvote(key):
+def vote(key, votes):
   post = ndb.Key(urlsafe=key).get()
-  post.upvote()
+  if votes > post.votes:
+    post.upvote()
+  elif votes < post.votes:
+    post.downvote()
   return post
 
 def delete(key):

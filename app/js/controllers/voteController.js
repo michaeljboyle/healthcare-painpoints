@@ -1,9 +1,38 @@
-app.controller('voteCtrl', ['$scope', '$rootScope', 'Posts',
-               function($scope, $rootScope, Posts) {
-  $rootScope.posts = Posts.query();
+(function() {
+    'use strict';
 
-  $scope.upvote = function(post) {
-    post.votes += 1;
-    post.$update();
-  }
-}]);
+    angular
+        .module('PainPointsApp')
+        .controller('voteCtrl', VoteController);
+
+    VoteController.$inject = [];
+
+    /* @ngInject */
+    function VoteController() {
+        var vm = this;
+        vm.hasVoted = false;
+        vm.post;
+        vm.upvote = upvote;
+
+
+        activate();
+
+        ////////////////
+
+        function activate() {
+        }
+
+        function upvote() {
+          console.log(vm.hasVoted);
+          if (!vm.hasVoted) {
+            vm.post.votes += 1;
+            vm.hasVoted = true;
+          }
+          else {
+            vm.post.votes -= 1;
+            vm.hasVoted = false;
+          }
+          vm.post.$update();
+        }
+    }
+})();

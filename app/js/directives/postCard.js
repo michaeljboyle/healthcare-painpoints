@@ -3,8 +3,10 @@ app.directive('postCard', function() {
     restrict: 'E',
     scope: {
       post: '=',
-      upvote: '&'
     },
+    bindToController: true,
+    controller: 'voteCtrl',
+    controllerAs: 'vm',
     templateUrl: 'js/directives/postCard.html'
   }; 
 });

@@ -1,7 +1,7 @@
-app.controller('submitCtrl', ['$scope', '$rootScope', '$location', 'Posts',
-               function($scope, $rootScope, $location, Posts) {
+app.controller('submitCtrl', ['$scope', '$rootScope', '$location', 'postService',
+               function($scope, $rootScope, $location, postService) {
   
-  $scope.post = new Posts();
+  $scope.post = new postService();
 
   $scope.submit = function() {
     $scope.post.$save(function() {
